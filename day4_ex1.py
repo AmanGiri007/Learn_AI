@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,classification_report
+import matplotlib.pyplot as plt
 
 #generate synthetic dataset
 np.random.seed(42)
@@ -27,3 +28,20 @@ print("Precision:",precision_score(y_test,y_pred))
 print("Recall:",recall_score(y_test,y_pred))
 print("F1 Score:",f1_score(y_test,y_pred))
 print("\nClassification Report:\n",classification_report(y_test,y_pred))
+
+#plot decision boundary
+x_min,x_max=X[:,0].min()-1,X[:,0].max()+1
+y_min,y_max=X[:,1].min()-1,X[:,1].max()+1
+xx,yy=np.meshgrid(np.arange(x_min,x_max,0.1),np.arange(y_min,y_max,0.1))
+
+#predict probabilities for grid points
+Z=model.predict(np.c_[xx.ravel(),yy.ravel()])
+Z=Z.reshape(xx.shape)
+
+#plot
+plt.contour(xx,yy,Z,alpha=0.8,cmap='coolwarm')
+plt.scatter(X_test['Age'],X_test['Salary'],c=y_test,edgecolors="k",cmap="coolwarm")
+plt.title("Logistic Regression Decision Boundary")
+plt.xlabel("Age")
+plt.ylabel("Salary")
+plt.show()
