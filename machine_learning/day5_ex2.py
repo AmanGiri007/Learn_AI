@@ -15,7 +15,7 @@ model.fit(X_train,y_train)
 y_pred= model.predict(X_test)
 cm=confusion_matrix(y_test,y_pred)
 
-disp=ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=data.target_name)
+disp=ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=data.target_names)
 disp.plot(cmap="Blues")
 plt.show()
 
