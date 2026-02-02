@@ -57,7 +57,7 @@ importance_df=importance_df.sort_values(by='Importance',ascending=False)
 
 #plot feature 
 plt.figure(figsize=(10,6))
-plt.barh(importance_df['Features'],importance_df['Importance'])
+plt.barh(importance_df['Feature'],importance_df['Importance'])
 plt.gca().invert_yaxis()
 plt.title("Feature Importance from Random Forest")
 plt.show()
